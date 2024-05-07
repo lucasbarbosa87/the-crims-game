@@ -1,0 +1,30 @@
+services:
+  crimsapi:
+    image: crimsapi
+    build:
+      context: ./Crims.Api
+      dockerfile: crims-api/Dockerfile
+      args:
+        - configuration=Debug
+    ports:
+      - 8081:8081
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ~/.vsdbg:/remote_debugger:rw
+  web:
+    build:
+      context: ./crims-backoffice
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+  postgres:
+    container_name: Database_Postgres
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: CrimsDbPassword
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"

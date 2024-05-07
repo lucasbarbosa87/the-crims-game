@@ -1,0 +1,38 @@
+<div class="flex h-screen bg-white">
+    <!-- Painel Esquerdo -->
+    <div class="justify-start items-center inline-flex">
+        <div class="hidden lg:flex items-center justify-center flex-1 bg-white text-black">
+            <img class="text-center h-screen" src="./assets/img/background.png" />
+        </div>
+    </div>
+
+    <!-- Painel Direito -->
+    <div class="w-full lg:w-1/2 flex items-center justify-center">
+        <div class="max-w-md w-full p-6">
+            <h1 class="text-gray-900 text-3xl text-center font-semibold">Acessar minha conta</h1>
+            <div class="text-gray-500 text-center font-normal leading-normal">Informe seus dados de acesso.</div>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
+                <div class="mt-4">
+                    <label for="email" class="block text-xs font-medium text-gray-700">E-mail</label>
+                    <input formControlName="email" type="email" id="email" name="email" placeholder="Insira seu E-mail"
+                        class="{{ email.invalid && (email.dirty || email.touched) ? 'border-red-500 placeholder:text-red-500' : '' }} mt-1 p-2 w-full border rounded-md bg-transparent placeholder:text-gray-400 placeholder:text-sm font-normal focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-300">
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-red-500 text-xs mt-2">
+                        Campo obrigatório</div>
+                </div>
+                <div class="mt-2">
+                    <label for="password" class="block text-xs font-medium text-gray-700">Senha</label>
+                    <input formControlName="password" type="password" id="password" name="password"
+                        placeholder="Insira sua senha"
+                        class="{{ password.invalid && (password.dirty || password.touched) ? 'border-red-500 placeholder:text-red-500' : '' }} mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 placeholder:text-gray-400 placeholder:text-sm font-normal transition-colors duration-300">
+                    <div *ngIf="password.invalid && (password.dirty || password.touched)"
+                        class="text-red-500 text-xs mt-2">
+                        Campo obrigatório</div>
+                </div>
+                <div>
+                    <button type="submit"
+                        class="w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:outline-none focus:bg-black focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300">Acessar</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
