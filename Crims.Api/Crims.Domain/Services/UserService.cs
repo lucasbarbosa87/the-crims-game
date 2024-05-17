@@ -55,7 +55,7 @@ namespace Crims.Domain.Services
             {
             }
             var user = mapper.Map<UserEntity>(registerDto);
-            var role = await roleRepository.GetItem(where => where.Name.Equals("user"));
+            var role = await roleRepository.GetItem(where => where.Name.Equals("User"));
             user.PasswordSalt = passwordHelper.GenerateSalt();
             user.Password = passwordHelper.HashPassword(registerDto.Password!, user.PasswordSalt);
             user.UserRoleId = role.Id;

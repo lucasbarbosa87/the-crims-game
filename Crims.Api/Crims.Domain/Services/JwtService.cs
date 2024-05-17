@@ -49,13 +49,13 @@ namespace Crims.Domain.Services
             var jwtToken = (JwtSecurityToken)validatedToken;
             var userId = jwtToken.Claims.First(x => x.Type == "unique_name").Value;
 
-            var user = await tokenRepository.GetItem(where => where.UserId.ToString() == userId);
+            var user = await tokenRepository.GetItem(where => where.UserId.ToString() == userId.ToUpper());
             if (user == null)
             {
                 throw new InvalidTokenFailure();
             }
             var compare = DateTime.UtcNow.CompareTo(user.ExpiresAt);
-            if (compare < 0)
+            if (compare > 0)
             {
                 throw new InvalidTokenFailure();
             }

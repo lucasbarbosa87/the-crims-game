@@ -18,9 +18,13 @@ namespace Crims.Data
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseNpgsql(
-                    configuration.GetConnectionString("database")
-                    );
+                options.UseSqlite(
+    configuration.GetConnectionString("database")
+    );
+
+                //options.UseNpgsql(
+                //    configuration.GetConnectionString("database")
+                //    );
             });
             services.AddScoped<ApplicationDbContext>();
 
